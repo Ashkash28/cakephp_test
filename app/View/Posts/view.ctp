@@ -1,5 +1,9 @@
-<h1><?php echo h($post['Post']['title']); ?></h1>
+<h1><?= h($post['Post']['title']); ?></h1>
 
-<p><small>Created: <?php echo $post['Post']['created_at']; ?></small></p>
+<p><small>Created: <?= $post['Post']['created_at']; ?></small></p>
 
-<p><?php echo h($post['Post']['body']); ?></p>
+<p><?= h($post['Post']['body']); ?></p>
+
+<?php 
+	echo $this->Html->link('Back', array('controller' => 'posts', 'action' => 'index'));
+?>

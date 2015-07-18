@@ -6,18 +6,22 @@ class PostsController extends AppController {
 	public $helpers = array("Html", "Form");
 
 	public function index() {
+// set() passes data from the controller to the view
 		$this->set("posts", $this->Post->find("all"));
 	}
 
 	public function view($id = null) {
+//checks to see if a following parameter is after /view/
 	       if (!$id) {
 	           throw new NotFoundException(__('Invalid post'));
 	       }
 
 	       $post = $this->Post->findById($id);
+//checks to see if id is present in the db
 	       if (!$post) {
 	           throw new NotFoundException(__('Invalid post'));
 	       }
+//passes post data to view.ctp
 	       $this->set('post', $post);
 	   }
 
@@ -33,15 +37,17 @@ class PostsController extends AppController {
 	    }
 
 	public function edit($id = null) {
+//checks to see if a following parameter is after /view/
 	    if (!$id) {
 	        throw new NotFoundException(__('Invalid post'));
 	    }
-
+//checks to see if post with the post id is in db
 	    $post = $this->Post->findById($id);
 	    if (!$post) {
 	        throw new NotFoundException(__('Invalid post'));
 	    }
 
+//updates put data to db and redirects user to index page
 	    if ($this->request->is(array('post', 'put'))) {
 	        $this->Post->id = $id;
 	        if ($this->Post->save($this->request->data)) {
@@ -57,6 +63,7 @@ class PostsController extends AppController {
 	}
 
 	public function delete($id) {
+//makes sure that delete is a post method
 	    if ($this->request->is('get')) {
 	        throw new MethodNotAllowedException();
 	    }
